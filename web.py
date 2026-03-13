@@ -101,7 +101,7 @@ FEATURE_SPECS = [
     {
         "key": "sodium_max",
         "label": "血钠最大值",
-        "unit": "mmol/L",
+        "unit": "mEq/L",
         "min": 120.0,
         "max": 162.0,
         "default": 140.0,
@@ -124,7 +124,7 @@ FEATURE_SPECS = [
     {
         "key": "pao2fio2ratio_min",
         "label": "氧合指数最低值",
-        "unit": "",
+        "unit": "mmHg",
         "min": 20.0,
         "max": 603.4,
         "default": 122.0,
@@ -247,7 +247,7 @@ def load_artifact() -> dict[str, Any]:
 
 
 def render_sidebar_info() -> None:
-    st.sidebar.markdown("## 输入信息说明")
+    st.sidebar.markdown("## 模型说明")
     st.sidebar.markdown(
         "本模型基于 LightGBM 算法构建，使用多种系统炎症标志物及临床指标预测重症肺炎患者谵妄风险。"
         "输出为谵妄发生概率（0~1），建议以 0.5 为临床决策阈值。"
@@ -256,7 +256,7 @@ def render_sidebar_info() -> None:
 
 def get_risk_level(probability: float) -> tuple[str, str, str]:
     if probability < 0.50:
-        return "低风险", "risk-low", "当前预测概率较低，但不能替代临床判断。"
+        return "低风险", "risk-low", "当前预测概率低于0.5，建议继续观察并定期评估谵妄风险。"
     return "高风险", "risk-high", "当前预测概率已达到或超过 0.5，建议重点关注谵妄风险并尽早干预。"
 
 
