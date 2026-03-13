@@ -252,14 +252,6 @@ def render_sidebar_info() -> None:
         "本模型基于 LightGBM 算法构建，使用多种系统炎症标志物及临床指标预测重症肺炎患者谵妄风险。"
         "输出为谵妄发生概率（0~1），建议以 0.5 为临床决策阈值。"
     )
-    st.sidebar.markdown("---")
-    for spec in FEATURE_SPECS:
-        if spec.get("type") == "select":
-            st.sidebar.markdown(f"- **{spec['label']}**：{spec['help']}")
-        elif spec.get("unit"):
-            st.sidebar.markdown(f"- **{spec['label']}**（{spec['unit']}）：{spec['help']}")
-        else:
-            st.sidebar.markdown(f"- **{spec['label']}**：{spec['help']}")
 
 
 def get_risk_level(probability: float) -> tuple[str, str, str]:
